@@ -4,15 +4,25 @@ import VideoListItem from '../video_list_item/video_list_item.js';
 
 import './video_list.css';
 
-var videoNames = ['video1', 'video2', 'video3']
 
-const VideoList = () => {
+const VideoList = ({videos}) => {
+
+	const videoItems = videos.map( (video) => {
+		return (
+			<VideoListItem 
+				video={video} 
+				key={video.id} 
+			/>
+		)
+	})	
+	
+	if(!videos) {
+		return <div>Loading...</div>
+	}
+
 	return (
 		<div className='video-list'>
-			{ videoNames.map( (name, index) => {
-				return <VideoListItem name={name} key={index} />
-			})
-			}
+			{videoItems}
 		</div>
 	)
 }
